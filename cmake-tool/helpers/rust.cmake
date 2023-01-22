@@ -66,7 +66,7 @@ function(RustAddLibrary lib_name)
         DEPENDS ${RUST_DEPENDS}
         WORKING_DIRECTORY ${RUST_SOURCE_DIR}
         COMMAND
-            ${CMAKE_COMMAND} -E env RUST_TARGET_PATH=${target_path} ${XARGO_TOOL} build
+            ${CMAKE_COMMAND} -E env RUST_SOURCE_DIR=${RUST_SOURCE_DIR} RUST_BUILD_DIR=${RUST_BUILD_DIR} RUST_TARGET_PATH=${target_path} ${XARGO_TOOL} build
             --target ${RUST_TARGET}
             --target-dir ${RUST_BUILD_DIR} -Z unstable-options
             --out-dir ${RUST_BUILD_DIR}

@@ -11,7 +11,8 @@ list(
         CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/helpers/ ${CMAKE_SOURCE_DIR}/projects/musllibc
 )
 
-include(check_arch_compiler)
+# Does not work without musl
+# include(check_arch_compiler)
 
 enable_language(C)
 enable_language(CXX)
@@ -52,7 +53,8 @@ get_filename_component(real_list "${CMAKE_CURRENT_LIST_DIR}" REALPATH)
 # not run as a user under the kernel
 add_subdirectory("${real_list}/../elfloader-tool" elfloader-tool)
 
-find_package(musllibc REQUIRED)
+# We dont want musl
+# find_package(musllibc REQUIRED)
 # Make build options a visible choice, default it to Debug
 set(
     CMAKE_BUILD_TYPE "Debug"
@@ -61,10 +63,12 @@ set(
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug;Release;RelWithDebInfo;MinSizeRel")
 mark_as_advanced(CLEAR CMAKE_BUILD_TYPE)
 
+# We dont want musl
 # Declare build flags for using musllibc in targets
-musllibc_set_environment_flags()
+# musllibc_set_environment_flags()
 
+# Does not work without musl
 # Now all platform compilation flags have been set, we can check the compiler against flags
-check_arch_compiler()
+# check_arch_compiler()
 
 add_subdirectory("${KERNEL_PATH}/libsel4" libsel4)
